@@ -36,3 +36,37 @@ class Fan:
             self.__radius = radius
         else:
             print("Radius must be a positive value!")
+
+    def set_color(self, color: str):
+        self.__color = color
+
+    def display_dashboard(self) -> str:
+        """Generates a custom terminal UI status card for the fan instance."""
+        RESET = "\033[0m"
+        BOLD = "\033[1m"
+        CYAN = "\033[36m"
+        GREEN = "\033[32m"
+        RED = "\033[31m"
+        YELLOW = "\033[33m"
+
+        speed_map = {Fan.SLOW: "SLOW", Fan.MEDIUM: "MEDIUM", Fan.FAST: "FAST"}
+        speed_text = speed_map.get(self.__speed, "UNKNOWN")
+
+        if self.__on:
+            status_badge = f"{GREEN}[ ON - ACTIVE ]{RESET}"
+            blade_art = f"{CYAN}// RUNNING // {RESET}"
+        else:
+            status_badge = f"{RED}[ OFF - IDLE ]{RESET}"
+            blade_art = f"{RED}── STOPPED ── {RESET}"
+
+        card = (
+            f"┌──────────────────────────────────────┐\n"
+            f"│ {BOLD}FAN DEVICE PROFILE{RESET}     {status_badge}   │\n"
+            f"├──────────────────────────────────────┤\n"
+            f"│  • Speed  : {YELLOW}{speed_text:<24}{RESET} │\n"
+            f"│  • Color  : {self.__color.capitalize():<25} │\n"
+            f"│  • Radius : {str(self.__radius) + ' units':<25} │\n"
+            f"│  • Motor  : {blade_art:<34} │\n"
+            f"└──────────────────────────────────────┘"
+        )
+        return card
