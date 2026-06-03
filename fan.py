@@ -69,4 +69,4 @@ class Fan:
             f"│  • Motor  : {blade_art:<34} │\n"
             f"└──────────────────────────────────────┘"
         )
-        return card
+        return card 
